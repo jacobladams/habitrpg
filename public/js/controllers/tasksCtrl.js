@@ -15,6 +15,7 @@ habitrpg.controller("TasksCtrl", ['$scope', '$rootScope', '$location', 'User','N
               break;
           case 'todo':
               $rootScope.playSound('ToDo');
+              $rootScope.$emit('tourStep','checkTodo');
               break;
           default:
               if (direction === 'down') $rootScope.playSound('Minus_Habit');
@@ -33,6 +34,7 @@ habitrpg.controller("TasksCtrl", ['$scope', '$rootScope', '$location', 'User','N
       }
       User.user.ops.addTask({body:newTask});
       delete listDef.newTask;
+      if (listDef.type=='daily') $rootScope.$emit('tourStep','addDaily')
     };
 
     /**
